@@ -1,5 +1,7 @@
 <script lang="ts">
-	import Treeview from '$lib/component/treeview/Treeview.svelte';
+	import Treeview from '$lib/components/ui/treeview/Treeview.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import { toast } from 'svelte-sonner';
 	const tree = {
 		label: 'USA',
 		children: [
@@ -30,4 +32,5 @@
 
 <div class="container h-full mx-auto flex justify-center items-center">
 	<Treeview {tree} isChild={false} />
+	<Button on:click={() => toast.success('Hello world')}>Show toast</Button>
 </div>

@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	// Retain module scoped expansion state for each tree node
 	const _expansionState: Record<string, boolean> = {};
 </script>
 
