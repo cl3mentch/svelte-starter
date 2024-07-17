@@ -45,7 +45,6 @@
 		"@wagmi/connectors": "^4.1.18",
 		"@wagmi/core": "^2.6.9",
 		"@web3modal/wagmi": "^4.1.1",
-		"@zerodevx/svelte-toast": "^0.9.5",
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.18",
