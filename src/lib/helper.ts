@@ -1,8 +1,5 @@
-import { failure, success } from '$lib/component/toast/toast';
-import {
-	InsufficientFundsError,
-	type GetBlockNumberErrorType
-} from 'viem';
+import { toast } from 'svelte-sonner';
+import { InsufficientFundsError, type GetBlockNumberErrorType } from 'viem';
 
 export const truncateString = (str: any, startNum: number, endNum: number) => {
 	if (!str) {
@@ -18,13 +15,12 @@ export const truncateString = (str: any, startNum: number, endNum: number) => {
 
 export const onTranslateErrMsg = (e: any) => {
 	const error: any = e as GetBlockNumberErrorType;
-	const isInsufficientFundsError =
-		error.walk((e: any) => e instanceof InsufficientFundsError) instanceof InsufficientFundsError;
+	const isInsufficientFundsError = error.walk((e: any) => e instanceof InsufficientFundsError);
 
 	if (isInsufficientFundsError) {
-		failure('Not Enough Balance in Wallet');
+		toast.error('Not Enough Balance in Wallet');
 	} else {
-		failure(error.shortMessage);
+		toast.error(error.shortMessage);
 	}
 };
 
@@ -34,7 +30,7 @@ export function copyToClipboard(text: any) {
 		navigator.clipboard
 			.writeText(text)
 			.then(() => {
-				success('Copied !');
+				toast.success('Copied !');
 			})
 			.catch((error) => {
 				console.error('Unable to copy text to clipboard', error);
@@ -48,7 +44,7 @@ export function copyToClipboard(text: any) {
 			storage.setSelectionRange(0, 99999);
 			document.execCommand('copy');
 			document.body.removeChild(storage);
-			success('Copied !');
+			toast.success('Copied !');
 		} catch (err) {
 			console.error('Unable to copy text to clipboard', err);
 		}
@@ -57,11 +53,9 @@ export function copyToClipboard(text: any) {
 
 export function filterInput(e: any) {
 	let inputAmount = e.target.value;
-	// Regular expression to match digits and a decimal point
 	let regex = /^[0-9]*\.?[0-9]*$/;
 
-	// Check if the input matches the regular expression
 	if (regex.test(inputAmount)) {
-		return inputAmount; // Set the amount to the filtered input
+		return inputAmount;
 	}
 }

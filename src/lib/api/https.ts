@@ -1,9 +1,6 @@
-import { goto } from '$app/navigation';
-import { get } from 'svelte/store';
-import { urls } from './configs/settings';
-import { clearUserData } from '../web3modal/web3modal';
-import { failure } from '$lib/component/toast/toast';
-import { storeAccessToken } from '$lib/stores/storeAccessToken';
+import Cookies from 'js-cookie';
+import { toast } from 'svelte-sonner';
+import { urls } from './settings';
 
 export const api = async (
 	method: string,
@@ -27,10 +24,11 @@ export const api = async (
 		};
 
 		if (useToken) {
-			const tokenApi: any = get(storeAccessToken);
-			if (tokenApi?.access_token) {
-				headers.Authorization = `Bearer ${tokenApi.access_token}`;
+			const tokenApi: any = Cookies.get('accessToken');
+			if (tokenApi) {
+				headers.Authorization = `Bearer ${tokenApi}`;
 			} else {
+				toast.error('Please Login Again To Access');
 				throw new Error('No access token available');
 			}
 		}
@@ -44,15 +42,9 @@ export const api = async (
 
 		resp = await response.json();
 
-		if (resp.code === 403 || resp.code === 500 || resp.data === '901') {
-			clearUserData();
-			goto('/');
-			failure('Login Session Expired, Please Login Again');
-		}
-
 		return resp;
 	} catch (err) {
 		console.error('API call error:', err);
-		return false;
+		throw err;
 	}
 };
