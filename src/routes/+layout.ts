@@ -1,7 +1,7 @@
-import type { LayoutLoad } from './$types';
 import { browser } from '$app/environment';
-import { loadTranslations, locale, defaultLocale } from '$lib/i18n';
-import { onChange } from '$lib/web3/walletConnect';
+import { defaultLocale, loadTranslations, locale } from '$lib/i18n';
+import { onChange } from '$lib/web3/wagmi';
+import type { LayoutLoad } from './$types';
 
 export let ssr = false;
 

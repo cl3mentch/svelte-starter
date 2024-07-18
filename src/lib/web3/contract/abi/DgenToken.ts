@@ -1,4 +1,97 @@
+import type { Abi } from "viem";
+
 export default [
+	{
+		inputs: [],
+		stateMutability: 'nonpayable',
+		type: 'constructor'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'spender',
+				type: 'address'
+			},
+			{
+				internalType: 'uint256',
+				name: 'allowance',
+				type: 'uint256'
+			},
+			{
+				internalType: 'uint256',
+				name: 'needed',
+				type: 'uint256'
+			}
+		],
+		name: 'ERC20InsufficientAllowance',
+		type: 'error'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'sender',
+				type: 'address'
+			},
+			{
+				internalType: 'uint256',
+				name: 'balance',
+				type: 'uint256'
+			},
+			{
+				internalType: 'uint256',
+				name: 'needed',
+				type: 'uint256'
+			}
+		],
+		name: 'ERC20InsufficientBalance',
+		type: 'error'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'approver',
+				type: 'address'
+			}
+		],
+		name: 'ERC20InvalidApprover',
+		type: 'error'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'receiver',
+				type: 'address'
+			}
+		],
+		name: 'ERC20InvalidReceiver',
+		type: 'error'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'sender',
+				type: 'address'
+			}
+		],
+		name: 'ERC20InvalidSender',
+		type: 'error'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'spender',
+				type: 'address'
+			}
+		],
+		name: 'ERC20InvalidSpender',
+		type: 'error'
+	},
 	{
 		anonymous: false,
 		inputs: [
@@ -28,19 +121,6 @@ export default [
 		anonymous: false,
 		inputs: [
 			{
-				indexed: false,
-				internalType: 'uint8',
-				name: 'version',
-				type: 'uint8'
-			}
-		],
-		name: 'Initialized',
-		type: 'event'
-	},
-	{
-		anonymous: false,
-		inputs: [
-			{
 				indexed: true,
 				internalType: 'address',
 				name: 'from',
@@ -61,6 +141,19 @@ export default [
 		],
 		name: 'Transfer',
 		type: 'event'
+	},
+	{
+		inputs: [],
+		name: 'TEST_WALLET',
+		outputs: [
+			{
+				internalType: 'address',
+				name: '',
+				type: 'address'
+			}
+		],
+		stateMutability: 'view',
+		type: 'function'
 	},
 	{
 		inputs: [
@@ -95,7 +188,7 @@ export default [
 			},
 			{
 				internalType: 'uint256',
-				name: 'amount',
+				name: 'value',
 				type: 'uint256'
 			}
 		],
@@ -146,60 +239,16 @@ export default [
 		inputs: [
 			{
 				internalType: 'address',
-				name: 'spender',
+				name: 'to',
 				type: 'address'
 			},
 			{
 				internalType: 'uint256',
-				name: 'subtractedValue',
+				name: 'amount',
 				type: 'uint256'
 			}
 		],
-		name: 'decreaseAllowance',
-		outputs: [
-			{
-				internalType: 'bool',
-				name: '',
-				type: 'bool'
-			}
-		],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		inputs: [],
-		name: 'freeMint',
-		outputs: [],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		inputs: [
-			{
-				internalType: 'address',
-				name: 'spender',
-				type: 'address'
-			},
-			{
-				internalType: 'uint256',
-				name: 'addedValue',
-				type: 'uint256'
-			}
-		],
-		name: 'increaseAllowance',
-		outputs: [
-			{
-				internalType: 'bool',
-				name: '',
-				type: 'bool'
-			}
-		],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		inputs: [],
-		name: 'initialize',
+		name: 'mint',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function'
@@ -252,7 +301,7 @@ export default [
 			},
 			{
 				internalType: 'uint256',
-				name: 'amount',
+				name: 'value',
 				type: 'uint256'
 			}
 		],
@@ -281,7 +330,7 @@ export default [
 			},
 			{
 				internalType: 'uint256',
-				name: 'amount',
+				name: 'value',
 				type: 'uint256'
 			}
 		],
@@ -296,4 +345,4 @@ export default [
 		stateMutability: 'nonpayable',
 		type: 'function'
 	}
-] as const;
+] as const as Abi;

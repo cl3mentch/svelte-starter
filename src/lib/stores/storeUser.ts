@@ -1,4 +1,5 @@
 import { persisted } from 'svelte-persisted-store';
+import { writable } from 'svelte/store';
 import { zeroAddress, type Address } from 'viem';
 
 interface IUserInfo {
@@ -11,6 +12,8 @@ export const emptyUserInfo: IUserInfo = {
 	web3_address: zeroAddress
 };
 
-export const storeUserInfo = persisted<IUserInfo>('storeUserInfo', emptyUserInfo);
+export const storeUserInfo = writable<IUserInfo>(emptyUserInfo);
+
+// export const storeUserInfo = persisted<IUserInfo>('storeUserInfo', emptyUserInfo);
 
 export type { IUserInfo };
